@@ -1,0 +1,17 @@
+<div class='nitrogen-component-container'>
+    <div class='nitrogen-component'>
+        <div class='nitrogen-login'>
+            <form class='nitrogen-login-form'>
+                <div class='nitrogen-form-group'>
+                    <label class='nitrogen-form-label'>Username</label>
+                    <input class='nitrogen-form-input' type='text' [(ngModel)]='loginData.username' placeholder='John'>
+                </div>
+                <div class='nitrogen-form-group'>
+                    <label class='nitrogen-form-label'>Password</label>
+                    <input class='nitrogen-form-input' [(ngModel)]='loginData.password' type='password'>
+                </div>
+                <button class='nitrogen-form-submit' (click)='submitLoginData()'>Login</button>
+            </form>
+        </div>
+    </div>
+</div>
