@@ -1,11 +1,11 @@
 {
   "name": "mileum",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "scripts": {
     "compile": "tsc",
     "compile+": "tsc && npm link",
-    "build": "tsc && bump --patch && npm link && npm publish"
+    "build": "tsc && bump --patch && npm link && git add . && git commit -m 'Version upgrade.' && git push && npm publish"
   },
   "private": false,
   "dependencies": {
