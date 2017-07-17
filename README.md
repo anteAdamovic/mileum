@@ -1,6 +1,7 @@
 # Mileum
 
 [![npm version](https://badge.fury.io/js/mileum.svg)](https://badge.fury.io/js/mileum)
+[![Build Status](https://travis-ci.org/CodeMileu/mileum.svg?branch=master)](https://travis-ci.org/CodeMileu/mileum)
 
 Intro
 =====
