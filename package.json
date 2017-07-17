@@ -1,10 +1,11 @@
 {
   "name": "mileum",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "scripts": {
     "compile": "tsc",
-    "compile+": "tsc && npm link"
+    "compile+": "tsc && npm link",
+    "build": "tsc && bump --patch && npm link && npm publish"
   },
   "private": false,
   "dependencies": {
@@ -35,6 +36,7 @@
     "protractor": "~4.0.13",
     "ts-node": "2.0.0",
     "tslint": "^4.5.0",
-    "typescript": "~2.2.0"
+    "typescript": "~2.2.0",
+    "version-bump-prompt": "^3.1.2"
   }
 }
