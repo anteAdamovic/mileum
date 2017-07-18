@@ -50,14 +50,14 @@ Services
 --------
  
  Currently suppored services:
- - [Radio]()
- - [HttpAPI]()
+ - [Radio](/src/services/radio)
+ - [HttpAPI](/src/services/http-api)
 
 Components
 ----------
 
  Currently supported components:
- - [MileumLogin]()
+ - [MileumLogin](/src/components/mileum-login)
 
 Tests
 =====
