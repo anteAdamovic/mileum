@@ -35,8 +35,8 @@ Table of contents
 =================
 
   * [Intro](#intro)
-  * [Table of contents](#table-of-contents)
   * [Installation](#installation)
+  * [Table of contents](#table-of-contents)
   * [Usage](#usage)
     * [Services](#services)
     * [Components](#components)
