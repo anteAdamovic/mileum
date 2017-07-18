@@ -6,7 +6,7 @@
 Intro
 =====
 
-Mileum is an Angular 2 framework intended for **rapid application development**. It's still in Alpha phase but is published on [npm repository](https://badge.fury.io/js/mileum) and can be installed and used. Documentation is being updated as new features are being released.
+Mileum is an Angular 2(v4.3.0) framework intended for **rapid application development**. It's still in Alpha phase but is published on [npm repository](https://badge.fury.io/js/mileum) and can be installed and used. Documentation is being updated as new features are being released.
 
 Installation
 ============
@@ -48,14 +48,35 @@ Usage
 
 Services
 --------
+ 
+ Currently suppored services:
+ - [Radio]()
+ - [HttpAPI]()
 
 Components
 ----------
 
+ Currently supported components:
+ - [MileumLogin]()
+
 Tests
 =====
+
+ Tests are not supported yet.
 
 Dependencies
 ============
 
-
+ Full list of dependencies:
+ - "@angular/common": "^4.0.0"
+ - "@angular/compiler": "^4.0.0"
+ - "@angular/core": "^4.0.0"
+ - "@angular/forms": "^4.0.0"
+ - "@angular/http": "^4.0.0"
+ - "@angular/platform-browser": "^4.0.0"
+ - "@angular/platform-browser-dynamic": "^4.0.0"
+ - "@angular/router": "^4.0.0"
+ - "core-js": "^2.4.1"
+ - "rxjs": "^5.1.0"
+ - "ts-helpers": "^1.1.1"
+ - "zone.js": "^0.8.4"
