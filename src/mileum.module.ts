@@ -7,17 +7,17 @@ import { Radio } from './services/radio/radio.service';
 import { HttpAPI } from './services/http-api/http-api.service';
 
 // Components
-import { NitrogenLogin } from './components/nitrogen-login/nitrogen-login.component';
+import { MileumLogin } from './components/mileum-login/mileum-login.component';
 
 @NgModule({
     imports: [FormsModule],
-    declarations: [NitrogenLogin],
+    declarations: [MileumLogin],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class NitrogenModule {
+export class MileumModule {
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: NitrogenModule,
+            ngModule: MileumModule,
             providers: [Radio, HttpAPI]
         }
     }

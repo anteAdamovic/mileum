@@ -1,38 +1,38 @@
-.nitrogen-component-container {
+.mileum-component-container {
   width: 100%;
 }
 
-.nitrogen-component {
+.mileum-component {
   width: 100%;
 }
 
-.nitrogen-login {
+.mileum-login {
     width: 100%;
     height: 100%;
     text-align: center;
 }
 
-.nitrogen-login-form {
+.mileum-login-form {
   display: inline-block;
   padding: 15px;
 }
 
-.nitrogen-form-group {
+.mileum-form-group {
   display: block;
   margin: 5px;
 }
 
-.nitrogen-form-label {
+.mileum-form-label {
   display: block;
   padding: 2px;
   text-align: left;
 }
 
-.nitrogen-form-input {
+.mileum-form-input {
   
 }
 
-.nitrogen-form-submit {
+.mileum-form-submit {
   padding: 5px 10px;
   margin: 10px;
 }

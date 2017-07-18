@@ -1,1 +1,1 @@
-export { NitrogenModule } from './src/nitrogen.module';
+export { MileumModule } from './src/mileum.module';

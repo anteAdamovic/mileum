@@ -1,0 +1,17 @@
+<div class='mileum-component-container'>
+    <div class='mileum-component'>
+        <div class='mileum-login'>
+            <form class='mileum-login-form'>
+                <div class='mileum-form-group'>
+                    <label class='mileum-form-label'>Username</label>
+                    <input class='mileum-form-input' type='text' [(ngModel)]='loginData.username' placeholder='John'>
+                </div>
+                <div class='mileum-form-group'>
+                    <label class='mileum-form-label'>Password</label>
+                    <input class='mileum-form-input' [(ngModel)]='loginData.password' type='password'>
+                </div>
+                <button class='mileum-form-submit' (click)='submitLoginData()'>Login</button>
+            </form>
+        </div>
+    </div>
+</div>
