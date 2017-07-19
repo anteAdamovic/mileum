@@ -22,9 +22,13 @@ Methods
 -------
 
 `broadcast(signal: Signal): void` - Broadcasts the signal to the default channel
+
 `listenTo(fn: () => {}): void` - Listens to default channel
+
 `addChannel(channel: string): void` - Creates a new channel
+
 `broadcastToChannel(channel: string, signal: Signal): void` - Broadcasts to specified channel, creates channel if it doesn't exist
+
 `listenToChannel(channel: string, fn: () => {}): void ` - Listens to specified channel, creates channel if it doesn't exist
 
 Usage
