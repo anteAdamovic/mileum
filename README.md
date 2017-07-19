@@ -50,14 +50,14 @@ Services
 --------
  
  Currently suppored services:
- - [Radio](/src/services/radio)
- - [HttpAPI](/src/services/http-api)
+ - [Radio](https://github.com/CodeMileu/mileum/tree/master/src/services/radio)
+ - [RequestManager](https://github.com/CodeMileu/mileum/tree/master/src/services/request-manager)
 
 Components
 ----------
 
  Currently supported components:
- - [MileumLogin](/src/components/mileum-login)
+ - [MileumLogin](https://github.com/CodeMileu/mileum/tree/master/src/components/mileum-login)
 
 Tests
 =====
