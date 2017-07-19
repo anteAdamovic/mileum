@@ -4,7 +4,7 @@ import 'rxjs';
 
 // Services
 import { Radio } from './services/radio/radio.service';
-import { HttpAPI } from './services/http-api/http-api.service';
+import { RequestManager } from './services/request-manager/request-manager.service';
 
 // Components
 import { MileumLogin } from './components/mileum-login/mileum-login.component';
@@ -18,7 +18,7 @@ export class MileumModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: MileumModule,
-            providers: [Radio, HttpAPI]
+            providers: [Radio, RequestManager]
         }
     }
 }

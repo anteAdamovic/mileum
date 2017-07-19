@@ -3,7 +3,7 @@ import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class HttpAPI {
+export class RequestManager {
     private staticHeaders: boolean = false;
     private requestOptions: RequestOptions;
     private routes: any = {};
