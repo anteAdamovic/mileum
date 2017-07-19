@@ -42,11 +42,8 @@ export class RequestManager {
      * @param use - Boolean, use or don't use static headers
      * @param headers - Headers (map) to use
      */
-    public useStaticHeaders(use: boolean, headers?: any): void {
-        this.staticHeaders = use;
-        if (use) {
-            this.requestOptions = this.formatHeaders(headers);
-        }
+    public useStaticHeaders(headers: any): void {
+        this.requestOptions = this.formatHeaders(headers);
     }
 
     /**
@@ -59,25 +56,49 @@ export class RequestManager {
         if (this.checkRoute(route)) {
             if (headers) {
                 return this.http.get(this.routes[route] + (urlParams ? urlParams : ''), this.formatHeaders(headers))
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else if (this.requestOptions) {
                 return this.http.get(this.routes[route] + (urlParams ? urlParams : ''), this.requestOptions)
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else {
                 return this.http.get(this.routes[route] + (urlParams ? urlParams : ''))
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try {
+                                response.data = JSON.parse(response._body);
+                            } catch (e) {
+                                console.error(e);
+                                response.dataRaw = response._body;
+                            }
                         }
                         return response;
                     });
@@ -97,25 +118,49 @@ export class RequestManager {
             const body = JSON.stringify(payload);
             if (headers) {
                 return this.http.post(this.routes[route] + (urlParams ? urlParams : ''), body, this.formatHeaders(headers))
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else if (this.requestOptions) {
                 return this.http.post(this.routes[route] + (urlParams ? urlParams : ''), body, this.requestOptions)
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else {
                 return this.http.post(this.routes[route] + (urlParams ? urlParams : ''), body)
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
@@ -133,25 +178,49 @@ export class RequestManager {
         if (this.checkRoute(route)) {
             if (headers) {
                 return this.http.delete(this.routes[route] + (urlParams ? urlParams : ''), this.formatHeaders(headers))
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else if (this.requestOptions) {
                 return this.http.delete(this.routes[route] + (urlParams ? urlParams : ''), this.requestOptions)
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else {
                 return this.http.delete(this.routes[route] + (urlParams ? urlParams : ''))
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
@@ -171,25 +240,54 @@ export class RequestManager {
             const body = JSON.stringify(payload);
             if (headers) {
                 return this.http.put(this.routes[route] + (urlParams ? urlParams : ''), body, this.formatHeaders(headers))
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else if (this.requestOptions) {
                 return this.http.put(this.routes[route] + (urlParams ? urlParams : ''), body, this.requestOptions)
+                    .catch((error, request) => {
+                        throw new Error(error);
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try { 
+                                response.data = JSON.parse(response._body); 
+                            } catch (e) { 
+                                console.error(e);
+                                response.dataRaw = response._body; 
+                            }
                         }
                         return response;
                     });
             } else {
                 return this.http.put(this.routes[route] + (urlParams ? urlParams : ''), body)
+                    .catch((error, request) => {
+                        console.log(error);
+                        return request;
+                    })
                     .map((response: any) => { 
                         if(response._body) {
-                            response.data = JSON.parse(response._body);
+                            try {
+                                try { 
+                                    response.data = JSON.parse(response._body); 
+                                } catch (e) { 
+                                    console.error(e);
+                                    response.dataRaw = response._body; 
+                                }
+                            } catch (e) {
+                                console.error(e);
+                            }
                         }
                         return response;
                     });

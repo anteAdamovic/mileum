@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
 import { Radio, Signal } from '../../services/radio/radio.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { Radio, Signal } from '../../services/radio/radio.service';
 })
 export class MileumLogin implements OnInit, OnDestroy {
     private notification: String;
+    private channelListener: EventEmitter<Signal>;
     public loginData: any = {
         username: '',
         password: ''
@@ -17,8 +18,8 @@ export class MileumLogin implements OnInit, OnDestroy {
     constructor(private radio: Radio) { }
 
     ngOnInit() {
-        this.radio.addChannel('mileum-login-channel');
-        this.radio.getChannel('mileum-login-channe;').subscribe(
+        this.channelListener = this.radio.listenToChannel('mileum-login-channel');
+        this.channelListener.subscribe(
             (signal: Signal) => {
                 if (signal.name == 'notification') {
                     this.notification = signal.message;
@@ -28,10 +29,10 @@ export class MileumLogin implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.radio.getChannel('mileum-login').unsubscribe();
+        this.channelListener.unsubscribe();
     }
 
     public submitLoginData(): void {
-        this.radio.broadcast(new Signal('mileum-login-submit', this.loginData), 'mileum-login-channel');
+        this.radio.broadcastToChannel('mileum-login-channel', new Signal('login-submit', this.loginData));
     }
 }

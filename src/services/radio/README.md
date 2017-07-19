@@ -23,13 +23,13 @@ Methods
 
 `broadcast(signal: Signal): void` - Broadcasts the signal to the default channel
 
-`listenTo(fn: () => {}): void` - Listens to default channel
+`listenTo(): EventEmitter<Signal>` - Returns the emitter of the default channel that can be subscribed to
 
 `addChannel(channel: string): void` - Creates a new channel
 
 `broadcastToChannel(channel: string, signal: Signal): void` - Broadcasts to specified channel, creates channel if it doesn't exist
 
-`listenToChannel(channel: string, fn: () => {}): void ` - Listens to specified channel, creates channel if it doesn't exist
+`listenToChannel(channel: string): EventEmitter<Signal>` - Returns the emitter of the specified channel that can be subscribed to, creates channel if it doesn't exist
 
 Usage
 -----
@@ -54,7 +54,7 @@ import { Radio, Signal } from 'mileum/services';
 constructor(private radio: Radio) { }
 
 subscribeToDefaultChannel(): void {
-    this.radio.listen(
+    this.radio.listen().subscribe(
         (signal: Signal) => {
             // Code when signal is caught
         }
@@ -96,8 +96,7 @@ import { Radio, Signal } from 'mileum/services';
 constructor(private radio: Radio) { }
 
 subscribeToChannel(channelName: string): void {
-    this.radio.listenToChannel(
-        channelName,
+    this.radio.listenToChannel(channelName).subscribe(
         (signal: Signal) => {
             // Code when signal is caught
         }

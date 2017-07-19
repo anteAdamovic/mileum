@@ -17,15 +17,15 @@ export class Radio {
         this.channels[channel].emit(signal);
     }
 
-    public listen(fn: () => {}): void {
-        this.channels['general'].subscribe(fn);
+    public listen(): EventEmitter<Signal> {
+        return this.channels['general'];
     }
 
-    public listenToChannel(channel: string, fn: () => {}): void {
+    public listenToChannel(channel: string): EventEmitter<Signal> {
         if (!this.channels[channel]) {
             this.channels[channel] = new EventEmitter<Signal>();
         }
-        this.channels[channel].subscribe(fn);
+        return this.channels[channel];
     }
 
     public addChannel(channel: string): void {
