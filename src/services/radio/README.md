@@ -21,7 +21,11 @@ If you want to send some data from one component to another you can use **Radio*
 Methods
 -------
 
-
+`broadcast(signal: Signal): void` - Broadcasts the signal to the default channel
+`listenTo(fn: () => {}): void` - Listens to default channel
+`addChannel(channel: string): void` - Creates a new channel
+`broadcastToChannel(channel: string, signal: Signal): void` - Broadcasts to specified channel, creates channel if it doesn't exist
+`listenToChannel(channel: string, fn: () => {}): void ` - Listens to specified channel, creates channel if it doesn't exist
 
 Usage
 -----
@@ -54,7 +58,8 @@ subscribeToDefaultChannel(): void {
 }
 ```
 
-NOTE: When you broadcast or listenTo specific channel, Radio will automatically create the channel if it doesn't exist.
+**NOTE:** When you _broadcastToChannel_ or _listenToChannel_ Radio will automatically create the channel if it doesn't already exist.
+
 To create a new channel: 
 
 ```Typescript
