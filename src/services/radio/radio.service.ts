@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import * as Rx from 'rxjs';
 
 @Injectable()
 export class Radio {
@@ -7,20 +6,26 @@ export class Radio {
         'general': new EventEmitter<Signal>()
     };
 
-    public broadcast(signal: Signal, channel?: string): void {
-        if (channel) {
-            this.channels[channel].emit(signal);
-        } else {
-            this.channels['general'].emit(signal);
-        }
+    public broadcast(signal: Signal): void {
+        this.channels['general'].emit(signal);
     }
 
-    public getChannel(channel?: string): EventEmitter<Signal> {
-        if (channel) {
-            return this.channels[channel];
-        } else {
-            return this.channels['general'];
+    public broadcastToChannel(channel: string, signal: Signal) {
+        if (!this.channels[channel]) {
+            this.channels[channel] = new EventEmitter<Signal>();
         }
+        this.channels[channel].emit(signal);
+    }
+
+    public listen(fn: () => {}): void {
+        this.channels['general'].subscribe(fn);
+    }
+
+    public listenToChannel(channel: string, fn: () => {}): void {
+        if (!this.channels[channel]) {
+            this.channels[channel] = new EventEmitter<Signal>();
+        }
+        this.channels[channel].subscribe(fn);
     }
 
     public addChannel(channel: string): void {
