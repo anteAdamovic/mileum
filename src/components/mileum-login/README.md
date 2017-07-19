@@ -5,7 +5,7 @@
 Description
 -----------
 
-MileumLogin component is intended as a simple as fast way of creating a login interface, currently it only features 2 fields _username_ and _password_ but it's planned in the near future to be customizable using a configuration object.
+MileumLogin component is intended as a simple and fast way of creating a login interface, currently it only features 2 fields _username_ and _password_ but it's planned in the near future to be customizable using a configuration object.
 
 When user enters the data and clicks 'Login' button, an new **Signal** with name **login-submit** is broadcasted to _mileum-login-channel_ in [Radio](https://github.com/CodeMileu/mileum/tree/master/src/services/radio) service to which you can subscribe to.
 
