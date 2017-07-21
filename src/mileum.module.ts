@@ -8,10 +8,14 @@ import { RequestManager } from './services/request-manager/request-manager.servi
 
 // Components
 import { MileumLogin } from './components/mileum-login/mileum-login.component';
+import { MileumRegister } from './components/mileum-register/mileum-register.component';
 
 @NgModule({
     imports: [FormsModule],
-    declarations: [MileumLogin],
+    declarations: [
+        MileumLogin,
+        MileumRegister
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MileumModule {

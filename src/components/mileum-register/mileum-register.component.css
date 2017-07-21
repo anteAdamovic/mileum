@@ -1,0 +1,38 @@
+.mileum-component-container {
+  width: 100%;
+}
+
+.mileum-component {
+  width: 100%;
+}
+
+.mileum-register {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.mileum-register-form {
+  display: inline-block;
+  padding: 15px;
+}
+
+.mileum-form-group {
+  display: block;
+  margin: 5px;
+}
+
+.mileum-form-label {
+  display: block;
+  padding: 2px;
+  text-align: left;
+}
+
+.mileum-form-input {
+  
+}
+
+.mileum-form-submit {
+  padding: 5px 10px;
+  margin: 10px;
+}
