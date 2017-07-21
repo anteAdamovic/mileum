@@ -35,4 +35,14 @@ export class MileumLogin implements OnInit, OnDestroy {
     public submitLoginData(): void {
         this.radio.broadcastToChannel('mileum-login-channel', new Signal('login-submit', this.loginData));
     }
+
+    public validateForm(): boolean {
+        if (!this.loginData.username) {
+            return false;
+        } else if (this.loginData.password.length < 8) {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -13,7 +13,7 @@
                     <label class='mileum-form-label'>Password</label>
                     <input class='mileum-form-input' [(ngModel)]='loginData.password' name='password' type='password'>
                 </div>
-                <button class='mileum-form-submit' (click)='submitLoginData()'>Login</button>
+                <button class='mileum-form-submit' [disabled]='!validateForm()' (click)='submitLoginData()'>Login</button>
             </form>
         </div>
     </div>
