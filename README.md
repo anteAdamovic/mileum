@@ -6,7 +6,7 @@
 Intro
 =====
 
-Mileum is an Angular 2(v4.3.0) framework intended for **rapid application development**. It's still in Alpha phase but is published on [npm repository](https://badge.fury.io/js/mileum) and can be installed and used. Documentation is being updated as new features are being released.
+Mileum is an Angular 2(v4.3.0) framework intended for **rapid application development**. It's still in **BETA** phase but is published on [npm repository](https://badge.fury.io/js/mileum) and can be installed and used. Documentation is being updated as new features are being released.
 
 Installation
 ============

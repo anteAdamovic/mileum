@@ -7,8 +7,7 @@ Description
 
 **RequestManager** service is a wrapper for Angular's Http service. It features calls to GET, POST, PUT and DELETE http requests.
 
-Apart from wrapped http methods **RequestManager** also provides a map of urls, allowing you to store the url inside it and give it a specific name
-so in the future you can just reference to in instead needing to pass the entire url.
+Apart from wrapped http methods **RequestManager** also provides a map of urls, allowing you to store the url inside it and give it a specific name so in the future you can just reference to it instead needing to pass the entire url.
 
 Example of the url route:
 
