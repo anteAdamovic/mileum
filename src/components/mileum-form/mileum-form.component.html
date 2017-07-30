@@ -1,0 +1,18 @@
+<div class='mileum-form'>
+    <div class='mileum-form-group' *ngFor="let field of getFormFields()">
+        <label *ngIf="field.label"
+        class='mileum-form-item mileum-form-label'>
+        {{field.label}}
+        </label>
+        <input *ngIf="field.type === 'input'"
+        class='mileum-form-item mileum-form-input'
+        type='field.variant' 
+        name='field.name' 
+        [(ngModel)]='field.model]'>
+        <textarea *ngIf="field.type === 'textarea'"
+        class='mileum-form-item mileum-form-textarea'
+        name='field.name'
+        [(ngModel)]='field.model]'>
+    </div>
+    <button class='mileum-form-button' (click)='submitFormData()'>{{ data.submit ? data.submit : 'Submit' }}</button>
+</div>
