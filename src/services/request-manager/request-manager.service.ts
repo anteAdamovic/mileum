@@ -1,23 +1,25 @@
-import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Http, RequestOptions, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class RequestManager {
-    private staticHeaders: boolean = false;
-    private requestOptions: RequestOptions;
-    private routes: any = {};
+    private staticHeaders : boolean = false;
+    private requestOptions : RequestOptions;
+    private routes : any = {};
 
-    constructor(private http: Http) { }
+    constructor(private http : Http) {}
 
     /**
      * Overwrites current routes with routes from a config file.
      * Can also be used to initialize routes.
      * @param file - Name of the file with configured routes
      */
-    public loadRoutesFromFile(file: string): void {
-        this.http.get(file).subscribe(
-            (routes: any) => this.routes = routes);
+    public loadRoutesFromFile(file : string) : void {
+        this
+            .http
+            .get(file)
+            .subscribe((routes : any) => this.routes = routes);
     }
 
     /**
@@ -25,7 +27,7 @@ export class RequestManager {
      * Can also be used to initialize routes.
      * @param routes - Routes configuration object
      */
-    public loadRoutes(routes: any): void {
+    public loadRoutes(routes : any) : void {
         this.routes = routes;
     }
 
@@ -33,7 +35,7 @@ export class RequestManager {
      * Sets a routes url, if specified route doesn't exist creates a new route.
      * @param route - Route entry
      */
-    public setRoute(route: string, url: string): void {
+    public setRoute(route : string, url : string) : void {
         this.routes[route] = url;
     }
 
@@ -42,7 +44,7 @@ export class RequestManager {
      * @param use - Boolean, use or don't use static headers
      * @param headers - Headers (map) to use
      */
-    public useStaticHeaders(headers: any): void {
+    public useStaticHeaders(headers : any) : void {
         this.requestOptions = this.formatHeaders(headers);
     }
 
@@ -52,56 +54,20 @@ export class RequestManager {
      * @param urlParams - Optional url parameters
      * @param headers - Optional header parameters
      */
-    public callGet(route: string, urlParams?: string, headers?: any): Observable<Response> {
-        if (this.checkRoute(route)) {
+    public callGet(route : string, urlParams?: string, headers?: any) : Observable < Response > {
+        if(this.checkRoute(route)) {
             if (headers) {
-                return this.http.get(this.routes[route] + (urlParams ? urlParams : ''), this.formatHeaders(headers))
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.get(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), this.formatHeaders(headers)));
             } else if (this.requestOptions) {
-                return this.http.get(this.routes[route] + (urlParams ? urlParams : ''), this.requestOptions)
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.get(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), this.requestOptions));
             } else {
-                return this.http.get(this.routes[route] + (urlParams ? urlParams : ''))
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try {
-                                response.data = JSON.parse(response._body);
-                            } catch (e) {
-                                console.error(e);
-                                response.dataRaw = response._body;
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.get(this.routes[route] + (urlParams
+                    ? urlParams
+                    : '')));
             }
         }
     }
@@ -113,57 +79,21 @@ export class RequestManager {
      * @param urlParams - Optional url parameters
      * @param headers - Optional header parameters
      */
-    public callPost(route: string, payload: any, urlParams?: string, headers?: any): Observable<Response> {
-        if (this.checkRoute(route)) {
+    public callPost(route : string, payload : any, urlParams?: string, headers?: any) : Observable < Response > {
+        if(this.checkRoute(route)) {
             const body = JSON.stringify(payload);
             if (headers) {
-                return this.http.post(this.routes[route] + (urlParams ? urlParams : ''), body, this.formatHeaders(headers))
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.post(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), body, this.formatHeaders(headers)));
             } else if (this.requestOptions) {
-                return this.http.post(this.routes[route] + (urlParams ? urlParams : ''), body, this.requestOptions)
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.post(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), body, this.requestOptions));
             } else {
-                return this.http.post(this.routes[route] + (urlParams ? urlParams : ''), body)
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.post(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), body));
             }
         }
     }
@@ -174,56 +104,20 @@ export class RequestManager {
      * @param urlParams - Optional url parameters
      * @param headers - Optional header parameters
      */
-    public callDelete(route: string, urlParams?: string, headers?: any): Observable<Response> {
-        if (this.checkRoute(route)) {
+    public callDelete(route : string, urlParams?: string, headers?: any) : Observable < Response > {
+        if(this.checkRoute(route)) {
             if (headers) {
-                return this.http.delete(this.routes[route] + (urlParams ? urlParams : ''), this.formatHeaders(headers))
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.delete(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), this.formatHeaders(headers)));
             } else if (this.requestOptions) {
-                return this.http.delete(this.routes[route] + (urlParams ? urlParams : ''), this.requestOptions)
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.delete(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), this.requestOptions));
             } else {
-                return this.http.delete(this.routes[route] + (urlParams ? urlParams : ''))
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.delete(this.routes[route] + (urlParams
+                    ? urlParams
+                    : '')));
             }
         }
     }
@@ -235,87 +129,71 @@ export class RequestManager {
      * @param urlParams - Optional url parameters
      * @param headers - Optional header parameters
      */
-    public callPut(route: string, payload: any, urlParams?: string, headers?: any): Observable<Response> {
-        if (this.checkRoute(route)) {
+    public callPut(route : string, payload : any, urlParams?: string, headers?: any) : Observable < Response > {
+        if(this.checkRoute(route)) {
             const body = JSON.stringify(payload);
             if (headers) {
-                return this.http.put(this.routes[route] + (urlParams ? urlParams : ''), body, this.formatHeaders(headers))
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.put(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), body, this.formatHeaders(headers)));
             } else if (this.requestOptions) {
-                return this.http.put(this.routes[route] + (urlParams ? urlParams : ''), body, this.requestOptions)
-                    .catch((error, request) => {
-                        throw new Error(error);
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try { 
-                                response.data = JSON.parse(response._body); 
-                            } catch (e) { 
-                                console.error(e);
-                                response.dataRaw = response._body; 
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.put(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), body, this.requestOptions));
             } else {
-                return this.http.put(this.routes[route] + (urlParams ? urlParams : ''), body)
-                    .catch((error, request) => {
-                        console.log(error);
-                        return request;
-                    })
-                    .map((response: any) => { 
-                        if(response._body) {
-                            try {
-                                try { 
-                                    response.data = JSON.parse(response._body); 
-                                } catch (e) { 
-                                    console.error(e);
-                                    response.dataRaw = response._body; 
-                                }
-                            } catch (e) {
-                                console.error(e);
-                            }
-                        }
-                        return response;
-                    });
+                return this.handleResponse(this.http.put(this.routes[route] + (urlParams
+                    ? urlParams
+                    : ''), body));
             }
         }
     }
 
+    private handleResponse(httpRequest : Observable < Response >) : Observable < Response > {
+        return httpRequest.catch((error, request) => {
+            console.error(error);
+            return request;
+        }).map((response : any) => {
+            if (response._body) {
+                try {
+                    try {
+                        response.data = JSON.parse(response._body);
+                    } catch (e) {
+                        console.error(e);
+                        response.dataRaw = response._body;
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+            return response;
+        });
+    }
+
     /**
-     * Checks if the route exists in current routes. 
+     * Checks if the route exists in current routes.
      * If not throws a RouteNotFound error.
      * @param route - Route name.
      */
-    private checkRoute(route: string): boolean {
-        if (this.routes[route]) {
+    private checkRoute(route : string) : boolean {
+        if(this.routes[route]) {
             return true;
         } else {
             throw new Error('RouteNotFound ' + route);
         }
     }
 
-    private formatHeaders(headers: any): RequestOptions {
+    /**
+     * Helper method to construct Headers from passed configuration
+     * @param headers - Headers configuration
+     */
+    private formatHeaders(headers : any) : RequestOptions {
         let requestOptions: RequestOptions = new RequestOptions();
         let requestHeaders: Headers = new Headers();
-        Object.getOwnPropertyNames(headers).forEach(
-            (header: string) => {
+        Object
+            .getOwnPropertyNames(headers)
+            .forEach((header : string) => {
                 requestHeaders.append(header, headers[header]);
-            }
-        );
+            });
 
         requestOptions.headers = requestHeaders;
         return requestOptions;
