@@ -11,9 +11,6 @@
         "outDir": "../lib",
         "declaration": true
     },
-    "files": [
-        "services.ts"
-    ],
     "exclude": [
         "node_modules"
     ]
